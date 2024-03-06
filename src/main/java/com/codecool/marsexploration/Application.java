@@ -2,7 +2,7 @@ package com.codecool.marsexploration;
 
 import com.codecool.marsexploration.configuration.Configuration;
 import com.codecool.marsexploration.model.TerrainMap;
-import com.codecool.marsexploration.service.Ui.MapUi;
+import com.codecool.marsexploration.service.Ui.InteractiveUserDefinedMapSetup;
 import com.codecool.marsexploration.service.filewriter.FileWriter;
 import com.codecool.marsexploration.service.logger.ConsoleLogger;
 import com.codecool.marsexploration.service.logger.Logger;
@@ -24,7 +24,7 @@ public class Application {
 
     public static void main(String[] args) {
         Logger logger = new ConsoleLogger();
-        MapUi ui = new MapUi(MAP_SIZE, logger);
+        InteractiveUserDefinedMapSetup ui = new InteractiveUserDefinedMapSetup(MAP_SIZE, logger);
         Configuration configuration = ui.promptUserForConfiguration();
         generateMap(configuration, logger);
     }

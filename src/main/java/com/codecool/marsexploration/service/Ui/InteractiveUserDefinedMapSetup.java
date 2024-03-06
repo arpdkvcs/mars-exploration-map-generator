@@ -12,12 +12,12 @@ import java.util.*;
 
 import static java.lang.System.in;
 
-public class MapUi {
+public class InteractiveUserDefinedMapSetup {
     private final MapConfigurationValidator mapConfigurationValidator;
     private final int MAP_SIZE;
     private final Logger logger;
 
-    public MapUi(int mapSize, Logger logger) {
+    public InteractiveUserDefinedMapSetup(int mapSize, Logger logger) {
         MAP_SIZE = mapSize;
         this.mapConfigurationValidator = new MapConfigurationValidator(mapSize);
         this.logger = logger;
@@ -62,7 +62,7 @@ public class MapUi {
     }
 
     private String promptFileName() {
-        System.out.println("Enter the name for the generated map file (default: generated-map): ");
+        System.out.println("Enter the name for the generated map file. Default: generated-map (.map): ");
         Scanner scanner = new Scanner(in);
         String fileName = scanner.nextLine().trim();
 
@@ -71,7 +71,7 @@ public class MapUi {
 
     private String promptGeneratorType() {
         while (true) {
-            System.out.println("Enter " + Application.GROUP_GENERATOR_TYPE + " for terrain group based map generation, " + Application.RANDOM_GENERATOR_TYPE + " for legacy random map generation");
+            System.out.println("Enter\n" + Application.GROUP_GENERATOR_TYPE + " for terrain group based map generation (mountains and separately pits are grouped together),\n" + Application.RANDOM_GENERATOR_TYPE + " for legacy random map generation (mountains and pits are randomly placed - no grouping)");
             Scanner scanner = new Scanner(in);
             String generatorType = scanner.nextLine().trim();
             if (generatorType.equals(Application.GROUP_GENERATOR_TYPE) || generatorType.equals(Application.RANDOM_GENERATOR_TYPE)) {

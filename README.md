@@ -1,65 +1,128 @@
-# mars-exploration-1
+<a name="readme-top"></a>
 
-## Story
+<div>
 
-Mars exploration (sprint 1)
-Looks like humanity will have a bright future after all: the colonization of Mars has finally started. But it is no small effort. To avoid wasting billions of dollars worth of equipment in space, a lot of simulation exercises need to be done – here on Earth.
+<h3 align="center">Mars exploration (map generator) </h3>
 
-To fully flesh out the Mars rovers software, sample maps are needed to calibrate its functions. This is where you come into the picture. Your team is selected to be a part of this wonderful adventure. Your first task is to create an application that can generate randomized maps of Mars, based on some input requirements. These requirements can change quickly, so you need to build a robust software that can handle changing requirements in a flexible way.
-
-In the first iteration, you need to generate four types of objects: mountains (`^`), pits (`#`), minerals (`*`), and pockets of water (`~`). The first two are patch-like terrain elements (covering a 2D continuous area on the map), the latter two are point-like resources (covering just one pixel on the map).
-
-Define the requirements for the resulting map through a configuration object. Along with the file name (to save the results in) and the width of the square map, try to set the most important general parameters of the requested terrain elements and resources in a compact way:
-
-- The most important parameters are the areas covered by the different terrain elements (for example, three mountain regions are required, with areas `10`, `20`, and `30`, and two pits with areas `5` and `15`).
-- A given number of mineral resource points must be placed next to mountain regions (if there is enough room), while a given number of pockets of water must be placed next to pits.
+  <p align="center">
+    A Codecool study project to create different types of game maps.
+    <br />
+    <a href="https://github.com/arpdkvcs/mars-exploration-map-generator/issues">Report Bug</a>
+</div>
 
 
-The map generator needs to create a new random map that conforms to the configuration parameters every time it runs. Experiment with different shape forming and arrangement strategies to create maps as realistic as possible. Try to include these strategies in the configuration object as well.
 
-## What are you going to learn?
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#purpose">Purpose</a></li>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#setup-and-run">Setup & Run</a></li>
+      </ul>
+    </li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
 
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+This project was a task in the school (Codecool) when we just became somewhat familiar with Java.
+This is a text based map generator. At the end of the interactive map setup it generates a 32x32 sized text based map.
+
+There are 5 types of cells on the generated map:
+* Flat (this is the default cell type on the map, at generation some are replaced with the rest of cell types)
+* Mountain
+* Pit
+* Minerals
+* Water
+
+It has 2 modes (all terrain type numbers are user defined):
+* Legacy:
+    * Mountains and Pits are randomly placed on the map
+    * Minerals are placed next to Mountains
+    * Waters are placed next to pits
+* Grouped:
+    * Mountains and Pits are grouped together and the group number is defined by the user
+    * Minerals and Waters are still placed next to Mountains and Pits respectively
+
+The generated text map can be graphically visualized by a visualizer.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+### Purpose
 - Practice SOLID principles.
 - Write text into files.
 - Structure complex algorithms into multiple steps and classes.
 - Practice other design principles such as SLAP and YAGNI.
 
-## Tasks
+Main challenge was to figure out how to limit the placeable terrains that are defined by the user at the interactive setup.
+We tried to find such a simple formula that as a result gives the user quite broad freedom at the setup and yet quite hard to give such parameters that would make the generation fail.
 
-1. Map configuration\
-    Create a custom map configuration object that sets all the important features for the map.
-   - There is a configuration object that contains the file name, map width, and the symbols and numbers of different terrain elements and resources, as well as the areas of the 2D-regions.
-   - The generated map is different every time it runs, in accordance with the provided parameters.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Built With
+
+* [![Java][Java]][Java-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-2. Shape generation and placement\
-   Create 2D objects (mountains and pits) one-by-one, then place them on the map if possible.
-    - Mountains and pits have exactly the given area but a random shape.
-    - Mountains and pits are placed within the boundaries of map without overlap.
-    - The shape generator code is covered with unit tests.
-    - The shape placer code is covered with unit tests.
 
-3. Resource placement\
-    Place mineral and water units to previously empty fields, next to their preferences (mountains and pits, respectively) if possible.
-    - Mineral and water units are placed next to their preferences (mountains and pits, respectively) if possible.
-    - The resource placement code is covered with unit tests.
+<!-- GETTING STARTED -->
+## Getting Started
 
-4. Configuration validator\
-    Create a validator for the map configuration object that exits the program if the provided data cannot be placed safely into the given area.
-    - There is a validator for the map configuration object that exits the program if the provided data cannot be placed safely into the given area.
-    - The validation code is covered with unit tests.
+### Prerequisites
+* This repository
+* [Java][Java-url]
 
-5. Shaper strategies\
-    Create different shape generating strategies, configurable by parameters.
-    - There are different shape generating strategies.
-    - The shape generating strategies can be configured using parameters which come from the map configuration object.
+### Setup and Run
 
-6. Save output\
-    Save the generated map into a plain text file.
-    - The generated map is saved into a plain text file specified in the configuration.
+_Steps:_
 
-## Hints
-- Find some example maps in the `resources` folder.
-- Create all the shapes first before trying to arrange them on the map without overlapping. If the arrangement process comes to a dead end, start the arrangement over with the same shapes but in a different order. Set a limit for the retries.
-- Try to write SOLID code. Discuss design choices within your team. The program must be open to extensions such as adding new terrain elements, resources, or generating strategies.
+1. Clone the repo
+   ```sh
+   git clone https://github.com/arpdkvcs/mars-exploration-map-generator.git
+   ```
+2. Run the `src/main/java/com/codecool/marsexploration/Application.java` from an IDE (Eclipse, IntelliJ) and follow the interactive setup prompts
+3. When finished you can check the generated text based map in the `src/main/resources` folder where it's name is the one you gave to it during the setup (default: generated-map.map)
+4. If you want to graphically visualize it then from the `src/main/resources` folder run the following command (assuming the map name is `generated-map.map`):
+    ```shell
+    java -jar visualizer.jar generated-map.map
+    ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contact
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
+Project Link: [https://github.com/arpdkvcs/mars-exploration-map-generator](https://github.com/arpdkvcs/mars-exploration-map-generator)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[linkedin-shield]: https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge
+[linkedin-url]: https://www.linkedin.com/in/arpad-kovacs/
+[Java]: https://img.shields.io/badge/Java-777777?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4IiBpZD0iamF2YSI+PHBhdGggZmlsbD0iIzAwNzRCRCIgZD0iTTQ3LjYxNyA5OC4xMnMtNC43NjcgMi43NzQgMy4zOTcgMy43MWM5Ljg5MiAxLjEzIDE0Ljk0Ny45NjggMjUuODQ1LTEuMDkyIDAgMCAyLjg3MSAxLjc5NSA2Ljg3MyAzLjM1MS0yNC40MzkgMTAuNDctNTUuMzA4LS42MDctMzYuMTE1LTUuOTY5ek00NC42MjkgODQuNDU1cy01LjM0OCAzLjk1OSAyLjgyMyA0LjgwNWMxMC41NjcgMS4wOTEgMTguOTEgMS4xOCAzMy4zNTQtMS42IDAgMCAxLjk5MyAyLjAyNSA1LjEzMiAzLjEzMS0yOS41NDIgOC42NC02Mi40NDYuNjgtNDEuMzA5LTYuMzM2eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNFQTJEMkUiIGQ9Ik02OS44MDIgNjEuMjcxYzYuMDI1IDYuOTM1LTEuNTggMTMuMTctMS41OCAxMy4xN3MxNS4yODktNy44OTEgOC4yNjktMTcuNzc3Yy02LjU1OS05LjIxNS0xMS41ODctMTMuNzkyIDE1LjYzNS0yOS41OCAwIC4wMDEtNDIuNzMxIDEwLjY3LTIyLjMyNCAzNC4xODd6Ij48L3BhdGg+PHBhdGggZmlsbD0iIzAwNzRCRCIgZD0iTTEwMi4xMjMgMTA4LjIyOXMzLjUyOSAyLjkxLTMuODg4IDUuMTU5Yy0xNC4xMDIgNC4yNzItNTguNzA2IDUuNTYtNzEuMDk0LjE3MS00LjQ1MS0xLjkzOCAzLjg5OS00LjYyNSA2LjUyNi01LjE5MiAyLjczOS0uNTkzIDQuMzAzLS40ODUgNC4zMDMtLjQ4NS00Ljk1My0zLjQ4Ny0zMi4wMTMgNi44NS0xMy43NDMgOS44MTUgNDkuODIxIDguMDc2IDkwLjgxNy0zLjYzNyA3Ny44OTYtOS40Njh6TTQ5LjkxMiA3MC4yOTRzLTIyLjY4NiA1LjM4OS04LjAzMyA3LjM0OGM2LjE4OC44MjggMTguNTE4LjYzOCAzMC4wMTEtLjMyNiA5LjM5LS43ODkgMTguODEzLTIuNDc0IDE4LjgxMy0yLjQ3NHMtMy4zMDggMS40MTktNS43MDQgMy4wNTNjLTIzLjA0MiA2LjA2MS02Ny41NDQgMy4yMzgtNTQuNzMxLTIuOTU4IDEwLjgzMi01LjIzOSAxOS42NDQtNC42NDMgMTkuNjQ0LTQuNjQzek05MC42MDkgOTMuMDQxYzIzLjQyMS0xMi4xNjcgMTIuNTkxLTIzLjg2IDUuMDMyLTIyLjI4NS0xLjg0OC4zODUtMi42NzcuNzItMi42NzcuNzJzLjY4OC0xLjA3OSAyLTEuNTQzYzE0Ljk1My01LjI1NSAyNi40NTEgMTUuNTAzLTQuODIzIDIzLjcyNSAwLS4wMDIuMzU5LS4zMjcuNDY4LS42MTd6Ij48L3BhdGg+PHBhdGggZmlsbD0iI0VBMkQyRSIgZD0iTTc2LjQ5MSAxLjU4N3MxMi45NjggMTIuOTc2LTEyLjMwMyAzMi45MjNjLTIwLjI2NiAxNi4wMDYtNC42MjEgMjUuMTMtLjAwNyAzNS41NTktMTEuODMxLTEwLjY3My0yMC41MDktMjAuMDctMTQuNjg4LTI4LjgxNSA4LjU0OC0xMi44MzQgMzIuMjI5LTE5LjA1OSAyNi45OTgtMzkuNjY3eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiMwMDc0QkQiIGQ9Ik01Mi4yMTQgMTI2LjAyMWMyMi40NzYgMS40MzcgNTctLjggNTcuODE3LTExLjQzNiAwIDAtMS41NzEgNC4wMzItMTguNTc3IDcuMjMxLTE5LjE4NiAzLjYxMi00Mi44NTQgMy4xOTEtNTYuODg3Ljg3NCAwIC4wMDEgMi44NzUgMi4zODEgMTcuNjQ3IDMuMzMxeiI+PC9wYXRoPjwvc3ZnPg==
+[Java-url]: https://www.java.com/
 
